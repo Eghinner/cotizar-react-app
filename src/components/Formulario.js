@@ -43,17 +43,16 @@ const Formulario = ({setCrypto,setMoneda}) => {
 	const [error, setError] = useState(false)
 
 	// Llamando al Costom hook useMoneda
-	const [moneda, SelectMoneda, actualizarMoneda] = useMoneda('Elige moneda', '', monedas);
+	const [moneda, SelectMoneda] = useMoneda('Elige moneda', '', monedas);
 
 	// Llamando al Costom hook useCrypto
-	const [criptomoneda, SelectCrypto, actualizarCrypto] = useCrypto('Elige criptomoneda', listacrypto);
+	const [criptomoneda, SelectCrypto] = useCrypto('Elige criptomoneda', listacrypto);
 
 	useEffect(() => {
 		const ConsultarApi = async () => {
 			const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
 			const resultado = await axios.get(url);
 			guardarCrypto(resultado.data.Data)
-			// console.log(resultado.data.Data)
 		}
 		ConsultarApi()
 	}, [])
